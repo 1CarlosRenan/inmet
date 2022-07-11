@@ -70,6 +70,7 @@ const SelectEstacao = () => {
       isOpen={isOpen}
       placeholderText="Selecione a estação"
       maxHeight={200}
+      ouiaId="seletor_estacao"
     >
       {listEstacoes}
     </Select>
@@ -209,6 +210,7 @@ const SelectAtributo = () => {
       isOpen={isOpen}
       placeholderText={"Selecione o atributo"}
       maxHeight={200}
+      ouiaId="seletor_atributo"
     >
       {listAtributos}
     </Select>
@@ -257,7 +259,7 @@ const ButtonFilter = () => {
       `/estacoes/${atributo}/${initialDateFormat}/${finalDateFormat}/${codEstacao}`
     );
     setTitle(estacao);
-    setNum((num) => num+1); // setando uma nova key para cada componente Plot criado
+    setNum((num) => num + 1); // setando uma nova key para cada componente Plot criado
     setInitialDateFormat(initialDateFormat);
     setFinalDateFormat(finalDateFormat);
     setCodEstacao(codEstacao);

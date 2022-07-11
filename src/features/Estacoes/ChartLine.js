@@ -3,7 +3,7 @@ import Plot from "react-plotly.js";
 import context from "./context";
 
 const ChartLine = () => {
-  const { dataEstacao, atributoFinal, validador, codEstacao, num, title } =
+  const { dataEstacao, atributoFinal, validador, codEstacao, num, title, estacao } =
     useContext(context);
 
   if (!validador || !dataEstacao || !codEstacao || !title) return null;
@@ -23,7 +23,8 @@ const ChartLine = () => {
         layout={{
           autosize: true,
           title: {
-            text: title,
+            //text: dataEstacao[0].CD_ESTACAO + ' - ' + dataEstacao[0].DC_NOME,
+            text: estacao,
           },
           font: { size: 13 },
           transition: {

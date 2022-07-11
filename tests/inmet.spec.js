@@ -8,24 +8,27 @@ const itensMenu = [
 
 let arrItensMenu = [];
 
-test.beforeEach(async ({ page }) => {
+let page;
+test.beforeAll(async ({ browser }) => {
+  const context = await browser.newContext();
+  page = await context.newPage();
   await page.goto('http://localhost:3000/');
   arrItensMenu = await page.locator('#page-sidebar > div > nav > ul > li');
 });
 
-test.afterEach(async ({ page }) => {
+test.afterEach(async () => {
   await page.close();
 });
 
 test.describe('Carregamento da página', () => {
-  test('Página não deve ser vazia', async ({ page }) => {
+  test('Página não deve ser vazia', async () => {
     expect(page).not.toBeNull();
     expect(await page.title()).not.toBeNull();
   })
 });
 
 test.describe('Itens do menu', () => {
-  test('Verificar Home', async ({ page }) => {
+  test('Verificar Home', async () => {
     const item = await arrItensMenu.nth(0);
     await expect(item).toHaveText([itensMenu[0]]);
 
@@ -33,7 +36,7 @@ test.describe('Itens do menu', () => {
     await expect(page).toHaveURL('http://localhost:3000/');
   })
 
-  test('Verificar Estações', async ({ page }) => {
+  test('Verificar Estações', async () => {
     const item = await arrItensMenu.nth(1);
     await expect(item).toHaveText([itensMenu[1]]);
 
@@ -41,7 +44,7 @@ test.describe('Itens do menu', () => {
     await expect(page).toHaveURL('http://localhost:3000/estacoes');
   })
 
-  test('Verificar Manual', async ({ page }) => {
+  test('Verificar Manual', async () => {
     const item = await arrItensMenu.nth(2);
     await expect(item).toHaveText([itensMenu[2]]);
 
@@ -55,7 +58,7 @@ test.describe('Itens do menu', () => {
 });
 
 test.describe('Página das Estações', () => {
-  test('Página deve conter plot', async ({ page }) => {
+  test('Página deve conter plot', async () => {
     await arrItensMenu.nth(1).click();
 
     const plot = await page.locator('#root > div > main > section > div > div:nth-child(1) > div > div > div > svg:nth-child(1)');
@@ -63,15 +66,15 @@ test.describe('Página das Estações', () => {
     await expect(plot).toBeVisible();
   });
 
-  test('Gerar novo plot', async ({ page }) => {
+  test('Gerar novo plot', async () => {
     await arrItensMenu.nth(1).click();
     await expect(page).toHaveURL('http://localhost:3000/estacoes');
     // Click #pf-select-toggle-id-6
-    await page.locator('#pf-select-toggle-id-6').click();
+    await page.locator('[data-ouia-component-id="seletor_estacao"]').click();
     // Click text=A422 - ABROLHOS
     await page.locator('text=A422 - ABROLHOS').click();
     // Click #pf-select-toggle-id-12
-    await page.locator('#pf-select-toggle-id-12').click();
+    await page.locator('[data-ouia-component-id="seletor_atributo"]').click();
     // Click text=Temperatura Média
     await page.locator('text=Temperatura Média').click();
     // Click [aria-label="Toggle date picker"] >> nth=0

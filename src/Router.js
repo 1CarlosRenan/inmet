@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Home from './features/Home'
 import Estacoes from './features/Estacoes'
+import React from 'react';
 
 const Router = () => {
   return (
