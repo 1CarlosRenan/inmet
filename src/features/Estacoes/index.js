@@ -8,7 +8,6 @@ import { Grid, GridItem, Skeleton, Spinner } from "@patternfly/react-core";
 
 const PageEstacoes = () => {
   const { estacoesIsLoading } = useContext(context);
-  // const estacoesIsLoading = true;
 
   if (estacoesIsLoading) {
     return (
