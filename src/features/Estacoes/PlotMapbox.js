@@ -62,6 +62,7 @@ const PlotMapbox = () => {
       style={{ width: "100%" }}
       config={{ responsive: true }}
       useResizeHandler={true}
+      onSelected={e => console.log(e)}
     />
   );
 };
